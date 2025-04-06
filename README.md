@@ -1,1 +1,1 @@
-# whisper-api
+# faster-whisper-api
