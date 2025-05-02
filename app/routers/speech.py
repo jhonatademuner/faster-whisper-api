@@ -5,12 +5,12 @@ router = APIRouter()
 
 @router.post("/transcribe")
 async def transcribe(
-    file: UploadFile = File(...),
+    speech_file: UploadFile = File(...),
     language: str = Form(None)):
     try:
-        text = await transcribe_speech(file, language=language)
+        transcript, inference_time = await transcribe_speech(speech_file=speech_file, language=language)
 
-        return {"text": text}
+        return {"transcript": transcript, "inference_time_ms": inference_time}
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
